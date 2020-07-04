@@ -1,5 +1,8 @@
 Custom Wordpress Theme
 
+http://tgmpluginactivation.com/ (Plugin Show)
+https://kirki.org/ (FrameWork)
+
 Theme Development
 https://developer.wordpress.org/themes/basics/including-css-javascript/
 
