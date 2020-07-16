@@ -1,0 +1,767 @@
+Angular Project :- 
+
+1) Event Binding
+2) Property Binding
+3) Class Binding
+
+App Component : -
+
+export class AppComponent {
+title : string = 'Hi U there';
+firstname : string = "Lucky";
+lastname : string = "Dhiman";
+abc = function() : string {
+return this.firstname + " " + this.lastname; 
+}
+
+checkpro : string = "Helo";
+arr = ["Sukhi","Lucky","Aman"];
+
+isHidden : boolean = false;
+
+texts : string = "";
+
+myfun(event)
+{
+console.log(event);
+this.texts = "Hello Suhi";
+}
+
+isdis : boolean = true;
+
+multiCss : string = "colrchange bgvolor ";
+
+singleCss : boolean = false;
+}
+
+{{ title }} </h1>
+<input type="text" name="" class="form-control" value={{checkpro}} > // Property Binding 1
+<input type="text" name="" class="form-control" [value]="checkpro" > // Property Binding 2
+<div [hidden]= "isHidden"> <h1>This is For checking </h1></div> // Inerpolation Agr Value Show na ho rahi ho
+
+//Event Binding
+<button class="btn btn-info" (click) ="myfun($event)"> Event </button> // Event Binding and alos check Event $Event
+<input type="text" name="" [value]="texts" />
+// End
+
+// Class Binding
+<button class="btn btn-danger" [class.active]="isActive"> Active Class </button>
+<button class="btn btn-danger" [class.disabled]="isdis"> Disabled Class </button>
+<button class="btn btn-primary" [class] = "multiCss"> More Info</button>
+<button class="btn btn-primary" [class.singleCss] = "singleCss"> More Info</button>
+// End
+
+Dom Property : - https://www.w3schools.com/jsref/dom_obj_style.asp
+https://angular.io/
+
+The pipes are listed below −
+
+Lowercasepipe
+Uppercasepipe
+Datepipe
+Currencypipe
+Jsonpipe
+Percentpipe
+Decimalpipe
+Slicepipe
+
+
+<form>
+	<div class="form-group">
+	    <label for=""> Firstname </label>
+	    <input type="text" minlength="5" maxlength="20" pattern="Lucky" ngModel required name="firstname" #fname = "ngModel" id="firstname" autocomplete="off" class="form-control" />
+	    
+	    <div class="alert alert-danger" *ngIf = "!fname.valid && fname.touched">
+	        <div *ngIf="fname.errors.required">
+	            Please Fill Firstname...
+	        </div>
+	        <div *ngIf="fname.errors.minlength">
+	            Minlength error...
+	        </div>
+	        <div *ngIf="fname.errors.pattern">
+	            Pattern is Not Matching
+	        </div>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for=""> Password </label>
+	    <input type="password" ngModel required name="password" #pass = "ngModel"  id="password" class="form-control" />
+	</div>
+	<input type="submit" class="btn btn-success" />
+</form>
+
+Error (More than one module matches. Use skip-import option to skip importing the component into the closest module.)  
+ng g component component-name --skip-import
+
+
+<form>
+  <div class="form-group">
+    <label for="fname">Firstname</label>
+    <input type="text" required minlength="5" maxlength="20" pattern="Luckydhiman" [ngModelOptions]="{standalone: true}" ngModel #fname = "ngModel" (click)="showValue(fname)" class="form-control" autocomplete="off" placeholder="Enter email" id="fname">
+
+    <div class="alert alert-danger" *ngIf="!fname.valid && fname.touched">
+        <div *ngIf="fname.errors.required">
+          Please Fill Firstname...
+        </div>
+        <div *ngIf="fname.errors.minlength">
+          Please Fill minlength...
+        </div>
+        <div *ngIf="fname.errors.pattern">
+          Please Fill Pattern...
+        </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" [ngModelOptions]="{standalone: true}"  ngModel #password = "ngModel" class="form-control" placeholder="Enter password" id="pwd">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+<input type="text" #uname /> <button (click)="createUser(uname)">Create User</button>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <td>
+        <h3>Username</h3>
+      </td>
+      <td>
+        <h3>Remove</h3>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let newa of album; index as i">
+      <td>
+        {{newa.name}}
+      </td>
+      <td>
+        <button (click)="delUser(i)" class="btn btn-danger">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  constructor(private router : Router) { }
+
+  ngOnInit(): void {
+  }
+
+  album = [];
+
+  createUser(uname)
+  {
+    this.album.push({
+      name : uname.value
+    })
+    if(this.album.length > 3)
+    {
+      this.router.navigate(['product']);
+    }
+  }
+
+  delUser(item)
+  {
+      this.album.splice(
+        item,1
+      )
+  }
+
+/* add Product */ 
+
+productSelect : boolean = false;
+  selectedProduct : string;
+  addProduct : any;
+
+  getProduct(product)
+  {
+     this.productSelect = true;
+     this.selectedProduct = product;
+  }
+
+  onProductValue()
+  {
+    this.addProduct = this.selectedProduct;
+  }
+
+
+  <div class="p-5 bg-primary text-white">
+  <h1 class="text-center mb-3"> Buy Product </h1>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+           <div class="alert alert-danger" *ngIf="addProduct">
+              <p>{{addProduct}} is added to card </p>
+              <button class="btn btn-success">Checkout</button>
+           </div>
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search">
+        <div class="input-group-append">
+          <button class="btn btn-success">Go</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card text-dark">
+            <img class="card-img-top" src="http://103.99.202.39:8082/housemaid/images/whychooseus.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Tv</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button class="btn btn-primary" (click)="getProduct('Tv')">Select Product</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card text-dark">
+            <img class="card-img-top" src="http://103.99.202.39:8082/housemaid/images/whychooseus.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Desktop</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button class="btn btn-primary" (click)="getProduct('Desktop')">Select Product</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card text-dark">
+            <img class="card-img-top" src="http://103.99.202.39:8082/housemaid/images/whychooseus.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Machine</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button  class="btn btn-primary" (click)="getProduct('Machine')">Select Product</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card text-dark">
+            <img class="card-img-top" src="http://103.99.202.39:8082/housemaid/images/whychooseus.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Laptop</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button class="btn btn-primary" (click)="getProduct('Laptop')">Select Product</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12 bg-success p-5 text-center">
+      <h2 *ngIf="!productSelect"> Please Select Any Product</h2>
+      <h3 *ngIf="productSelect">{{selectedProduct}} is Selected</h3>
+      <button class="btn btn-info" (click)="onProductValue()">Add To Product</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+/*****************/
+Toggle Button //////////////
+
+Ts/////
+
+toggle : boolean = false;
+
+//define your method
+createBlock(event){
+  //if you just want to toggle the class; change toggle variable.
+  this.toggle = !this.toggle;
+}
+
+
+<div class="col-md-12">
+  <button class="btn btn-success" [ngClass]="{'active': toggle}" (click)="createBlock($event)">Create Block</button>
+  <ng-container *ngIf="toggle; then show else hide"></ng-container>
+  <ng-template #show>
+     <h1>This Is My Block</h1>
+  </ng-template>
+  <ng-template #hide>
+    <h1>No Block</h1>
+ </ng-template>
+</div>
+
+////////////************** Api Data
+
+// Services
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ServicesapiService {
+
+  constructor(private http: HttpClient) { }
+
+  url = 'https://jsonplaceholder.typicode.com/comments?postId=1';
+
+  products():Observable<any> {
+    return this.http.get(this.url);
+  }
+
+  // products = [
+  //   { id : 1, name : "Lucky" },
+  //   { id : 2, name : "Lucky 1" },
+  //   { id : 3, name : "Lucky 2" },
+  //   { id : 4, name : "Lucky 3" }
+  // ]
+}
+
+// Component Ts
+import { Component, OnInit } from '@angular/core';
+import { ServicesapiService } from '../api/servicesapi.service';
+
+@Component({
+  selector: 'app-practice',
+  templateUrl: './practice.component.html',
+  styleUrls: ['./practice.component.scss']
+})
+export class PracticeComponent implements OnInit {
+
+  constructor(private msgServices: ServicesapiService) {}
+
+  product : {};
+  ngOnInit(): void {
+    this.msgServices.products().
+    subscribe(proData => this.product = proData)
+  }
+
+}
+
+// Component HTML
+<div *ngFor="let pro of product">
+{{pro.id}} : {{pro.name}}
+</div>
+
+<script>
+  class student {
+    constructor(name,age,classNew){
+      this.myname = name;
+      this.myage = age;
+      this.mycls = classNew;
+    }
+
+    bioData()
+    {
+      return `My Name is ${this.myname} My Age is ${this.myage} and My Class is ${this.mycls}`;
+    }
+  }
+
+  class player extends student {
+    constructor(name,age,classNew,game){
+      super(name,age,classNew);
+      this.myGame = game;
+    }
+
+    player_bio(){
+      return `${super.bioData()}. My Game is ${this.myGame}`;
+    }
+  }
+
+  let c = new player('Sukhi',25,'CSE','Cricket');
+  console.log(c.player_bio());
+</script>
+
+
+<script>
+  
+  function CovidData(indexs) {
+    
+    fetch('https://api.covid19api.com/summary')
+      .then( (apiData) => {
+      return apiData.json();
+
+    }).then((aData) => {
+      console.log(aData);
+      let shData = aData.Countries[`${indexs}`];
+      
+      document.getElementById('main').innerText = `${shData.Country} ${shData.NewConfirmed}`;
+      
+
+    }).catch( (error) => {
+      console.log(`The Error : ${error}`);
+    })  
+  }
+  CovidData(76);
+  CovidData(30);
+
+
+  <script>
+
+  const fetchPromise = fetch("https://jsonplaceholder.typicode.com/comments");
+  // Target main element
+  const main = document.getElementById("demo");
+  fetchPromise.then(response => {
+    return response.json();
+  }).then(people => {
+    const newCh = people.slice(0,10);
+    const names = newCh.map(person => person.email).join("\n");
+    // Append names to main element
+    main.innerHTML = names;
+  });
+  </script>
+
+
+</script>
+
+<script>
+
+  const fetchPromise = fetch("https://jsonplaceholder.typicode.com/comments");
+  // Target main element
+  const main = document.getElementById("demo");
+  fetchPromise.then(response => {
+    return response.json();
+  }).then(myJson => {
+
+    // Append names to main element
+     main.innerHTML = listOfNames(myJson);
+  }).catch( (error) => {
+      console.log(`The Error : ${error}`);
+    }) 
+
+    function listOfNames(myJson) {
+      const newCh = myJson.slice(0,20);
+    const names = newCh.map(myJson => `
+    <tr>
+      <td>${myJson.id}</td>
+      <td>${myJson.email}</td>
+      <td>${myJson.name}</td>
+    </tr> 
+    `)
+    
+    .join("\n");
+    return `<table border="1">${names}</table>`
+  }
+
+  </script>
+
+//***/
+Filter Pipe
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filter'
+})
+
+export class FilterPipe implements PipeTransform {
+
+  transform(value: any, searchTerm: any ): any {
+    if(value.length === 0)
+    {
+        return value
+    }
+    return value.filter(function(search){
+      return search.name.toLowerCase(). indexOf(searchTerm) > -1;
+    });
+  }
+
+}
+
+<div class="form-group mt-5">
+  <input type="text" class="form-control" [(ngModel)]="nameSearch"  id="text" placeholder="Search By Value">
+</div>
+
+<table class="table mt-4">
+  <thead>
+    <tr class="bg-dark text-white">
+      <th scope="col">#</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Availibility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pro of productArr | filter : nameSearch" >
+      <th scope="row">{{pro.sno}}</th>
+      <td>{{pro.name}}</td>
+      <td>{{pro.price}}</td>
+      <td class="badge">{{pro.availblibity}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+/********  Template Driven Form ***********/
+Ts //////////
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.scss']
+})
+export class DemoComponent implements OnInit {
+
+  defaultValue = "Angular";
+  userName = '';
+  defalutGender = "Male";
+  submitted : boolean = false;
+
+  skills = [{
+    skill: '',
+  }];
+
+  formData = {
+    username : "",
+    email : "",
+    gender : "",
+    course : ""
+  }
+
+  genders = [
+    {
+      id : 1,
+      value : 'Male'
+    },
+    {
+      id : 2,
+      value : 'Female'
+    }
+  ]
+
+  @ViewChild('myForm') myForm:NgForm;
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  onSubmit(form:NgForm)
+  {
+     console.log(form);
+     this.submitted = true;
+     this.formData.username = this.myForm.value.userDetails.username;
+     this.formData.email = this.myForm.value.userDetails.email;
+     this.formData.gender = this.myForm.value.gender;
+     this.formData.course = this.myForm.value.course;
+  }
+
+  setUserName()
+  {
+     this.myForm.form.patchValue({
+        userDetails : {
+          username : 'Lucky'
+        }
+     })
+  }
+
+  addSkills()
+  {
+    this.skills.push({
+      skill: '',
+    });
+  }
+}
+
+
+<br>
+<form class="w-50 p-3 shadow m-auto" (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+  <div ngModelGroup="userDetails" #userDetails="ngModelGroup">
+    <div class="form-group">
+      <label for="username">Username*</label>
+      <input type="text"
+      class="form-control"
+      [(ngModel)]="userName"
+      name="username"
+      id="username"
+      autocomplete="off"
+      required
+      placeholder="Enter Username">
+      <small *ngIf="userName">Your Username is : <strong>{{userName}}</strong></small>
+      <button (click)="setUserName()" class="btn btn-info btn-sm mt-2">SetUserName</button>
+    </div>
+    <div class="form-group">
+      <label for="email">Email*</label>
+      <input
+      type="email"
+      email
+      class="form-control"
+      id="email"
+      name="email"
+      required
+      #email="ngModel"
+      ngModel
+      placeholder="Enter Email">
+      <small *ngIf="!email.valid && email.touched" class="text-danger">Please Enter Valid Email</small>
+    </div>
+    <small class="text-danger" *ngIf="!userDetails.valid && userDetails.touched">Please Fill All Field</small>
+  </div>
+
+  <!-- <div class="form-group">
+    <div class="custom-control custom-radio" *ngFor="let gender of genders">
+      <input type="radio" id="{{gender.id}}" [(ngModel)]="defalutGender" name="gender" value="{{gender.value}}" class="custom-control-input">
+      <label class="custom-control-label" for="{{gender.id}}">{{gender.value}}</label>
+    </div>
+  </div> -->
+
+  <div class="form-group">
+    <div class="custom-control custom-radio">
+      <input type="radio" id="male" ngModel name="gender" value="male" class="custom-control-input">
+      <label class="custom-control-label" for="male">Male</label>
+    </div>
+    <div class="custom-control custom-radio">
+      <input type="radio" id="female" ngModel name="gender" value="female" class="custom-control-input">
+      <label class="custom-control-label" for="female">Female</label>
+    </div>
+  </div>
+
+  <div class="form-group" ngModelGroup="skills">
+    <label for="skills">Skills</label>
+    <ng-container *ngFor="let skill of skills;let i = index">
+        <input type="text" name="{{i}}" required ngModel id="{{i}}" placeholder="Enter Skills" class="form-control mb-2" />
+    </ng-container>
+    <button (click)="addSkills()" class="btn btn-light btn-sm mt-2">+ Add Skills</button>
+  </div>
+
+  <div class="form-group">
+    <label for="course">Courses*</label>
+    <select class="form-control" required [(ngModel)]="defaultValue" name="course" >
+      <option>Angular</option>
+      <option>Html</option>
+      <option>Javascript</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+<br>
+<div class="w-50 p-3 shadow m-auto" *ngIf="submitted">
+  <h2>Form Data</h2>
+  <p>Username : <strong>{{formData.username}}</strong></p>
+  <p>Email : <strong>{{formData.email}}</strong></p>
+  <p>Gender : <strong>{{formData.gender}}</strong></p>
+  <p>Course : <strong>{{formData.course}}</strong></p>
+</div>
+
+
+/***** Api *****/
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RestoService {
+
+  constructor(private http: HttpClient) { }
+
+  url = "http://localhost:3000/resturants";
+  getListing(): Observable<any>{
+    return this.http.get(this.url)
+  }
+
+  saveResto(data)
+  {
+    return this.http.post(this.url,data);
+  }
+
+  delResto(id)
+  {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getCurrentResto(id)
+  {
+    return this.http.get(`${this.url}/${id}`);
+  }
+
+  updateResto(id,data)
+  {
+    return this.http.put(`${this.url}/${id}`, data);
+  }
+
+}
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RestoService } from '../resto.service';
+
+@Component({
+  selector: 'app-add-resto',
+  templateUrl: './add-resto.component.html',
+  styleUrls: ['./add-resto.component.scss']
+})
+export class AddRestoComponent implements OnInit {
+
+  constructor(private resto:RestoService) { }
+  addRestio : FormGroup;
+  succssData : boolean = false;
+  ngOnInit(): void {
+    this.addRestio = new FormGroup({
+      name : new FormControl(null,Validators.required),
+      address : new FormControl(null,Validators.required),
+      email : new FormControl(null,Validators.required)
+    })
+  }
+
+  ngSubmit()
+  {
+     this.resto.saveResto(this.addRestio.value)
+     .subscribe((res)=>{
+        this.succssData = true;
+     });
+     this.addRestio.reset({});
+  }
+
+  closeAlert()
+  {
+     this.succssData = false;
+  }
+}
+
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RestoService } from '../resto.service';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-update-resto',
+  templateUrl: './update-resto.component.html',
+  styleUrls: ['./update-resto.component.scss']
+})
+export class UpdateRestoComponent implements OnInit {
+
+  constructor(private resto:RestoService, private _activatedRoute : ActivatedRoute) {
+
+  }
+  editRestio : FormGroup;
+  ngOnInit(): void {
+
+     console.log(this._activatedRoute.snapshot.params.id)
+     this.resto.getCurrentResto(this._activatedRoute.snapshot.params.id)
+     .subscribe((res => {
+      this.editRestio = new FormGroup({
+        name : new FormControl(res['name']),
+        address : new FormControl(res['address']),
+        email : new FormControl(res['email'])
+       })
+
+     }))
+  }
+
+  updateData()
+  {
+    console.log(this.editRestio.value);
+    this.resto.updateResto(this._activatedRoute.snapshot.params.id, this.editRestio.value).subscribe( (res) =>{
+      console.log(res,res)
+    })
+
+  }
+}
