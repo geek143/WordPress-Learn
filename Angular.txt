@@ -765,3 +765,20 @@ export class UpdateRestoComponent implements OnInit {
 
   }
 }
+
+
+Change Material Css TWO WAY:-
+1) import { ViewEncapsulation } from '@angular/core';
+// ...
+@Component({
+    // ...
+    encapsulation: ViewEncapsulation.None,
+})
+
+2) SCSS = ::ng-deep
+{
+  .newc .mat-radio-label-content
+  {
+   color:red
+  }
+}
