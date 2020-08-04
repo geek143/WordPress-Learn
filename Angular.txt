@@ -807,3 +807,94 @@ https://www.npmjs.com/package/ngx-pagination
     </td>
   </tr>
 </ng-container>
+
+/*******************************************************************************************/
+FormArray Reative
+<br><br>
+<form class="mt-4 w-25 shadow p-3 m-auto" (ngSubmit)="onSubmit()" [formGroup]="myForm">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+    type="email"
+    class="form-control"
+    name = "email"
+    formControlName="email"
+    id="email" >
+    <small *ngIf="!email.valid && email.touched" class="text-danger">
+      <small *ngIf="email.errors.required">Please Fill Email</small>
+      <small *ngIf="email.errors.email">Please Valid Email</small>
+    </small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+    type="password"
+    class="form-control"
+    name = "password"
+    formControlName="password"
+    id="password">
+  </div>
+
+  <div class="form-group">
+    <div class="custom-control custom-radio custom-control-inline" *ngFor="let item of genders;index as i">
+      <input type="radio"  id="{{item.id}}" formControlName="gender" value="{{item.gender}}" class="custom-control-input"  />
+      <label class="custom-control-label" for="{{item.id}}">{{item.gender}}</label>
+    </div>
+  </div>
+
+  <div class="form-group" formArrayName="skills">
+    <label>Skills</label>
+    <ng-container *ngFor="let item of formData.controls; index as i">
+      <input type="text" class="form-control" formControlName="{{i}}" autocomplete="off" placeholder="Add Skills" />
+    </ng-container>
+    <button class="mt-2 btn btn-info btn-sm" (click)="addSkills()">Add Skills</button>
+  </div>
+
+  <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Submit</button>
+</form>
+
+  myForm = new FormGroup ({
+    email : new FormControl(null,[Validators.required,Validators.email]),
+    password : new FormControl(null, Validators.required),
+    gender : new FormControl(null, Validators.required),
+    skills : new FormArray([
+      new FormControl(null, Validators.required)
+    ])
+  })
+
+  genders = [
+    {
+      id : 1,
+      gender: "Male"
+    },
+    {
+      id : 2,
+      gender: "Female"
+    }
+  ];
+  submitted : boolean = false;
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+
+  get email() {
+    return this.myForm.get('email');
+  }
+
+  get formData() { return <FormArray>this.myForm.get('skills'); }
+
+
+
+  onSubmit()
+  {
+    console.log(this.myForm);
+  }
+
+  addSkills()
+  {
+    this.formData.push(new FormControl(null, Validators.required));
+  }
+
