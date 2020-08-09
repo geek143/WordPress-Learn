@@ -1,6 +1,14 @@
 Media Query :-
-For Safari Browser:- @media only screen and (-webkit-min-device-pixel-ratio: 1) {
-   Your Code
+For Safari Browser:- @media screen and (-webkit-min-device-pixel-ratio:0) { 
+This Will Work in Sfari ::i-block-chrome, .loginBox img
+{ 
+    height: 25px;
+}
+
+::i-block-chrome, .navToggle
+{
+	height: 33px;
+}
 }
 
 For Internet Ie:- @media only screen and (-webkit-min-device-pixel-ratio: 1) {
