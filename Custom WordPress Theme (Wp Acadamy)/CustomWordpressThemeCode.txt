@@ -1,3 +1,21 @@
+Media Query :-
+For Safari Browser:- @media only screen and (-webkit-min-device-pixel-ratio: 1) {
+   Your Code
+}
+
+For Internet Ie:- @media only screen and (-webkit-min-device-pixel-ratio: 1) {
+   Your Code
+}
+
+WebSIte:-
+https://stackoverflow.com/questions/28417056/how-to-target-only-ie-any-version-within-a-stylesheet
+https://stackoverflow.com/questions/16348489/is-there-a-css-hack-for-safari-only-not-chrome
+http://browserhacks.com/
+https://autoprefixer.github.io/
+https://philipnewcomer.net/2014/04/target-internet-explorer-10-11-css/
+
+/*************/
+
 Custom Wordpress Theme
 
 http://tgmpluginactivation.com/ (Plugin Show)
