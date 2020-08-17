@@ -15,6 +15,10 @@ For Internet Ie:- @media only screen and (-webkit-min-device-pixel-ratio: 1) {
    Your Code
 }
 
+@media screen and (max-width: 823px (Change As per Devices) ) and (orientation:landscape) { 
+	// Here Code
+}
+
 WebSIte:-
 https://stackoverflow.com/questions/28417056/how-to-target-only-ie-any-version-within-a-stylesheet
 https://stackoverflow.com/questions/16348489/is-there-a-css-hack-for-safari-only-not-chrome
