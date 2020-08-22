@@ -2,6 +2,9 @@ GitBash In Visual Studio
 https://code.visualstudio.com/docs/editor/integrated-terminal
 "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
 
+Include Bootstrap In Angular
+https://www.techiediaries.com/angular-bootstrap/
+
 Angular Event Binding
 http://prntscr.com/tpwcnq
 
