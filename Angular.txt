@@ -901,3 +901,126 @@ FormArray Reative
     this.formData.push(new FormControl(null, Validators.required));
   }
 
+
+////////////////////////////////////////////
+Using Id to find Data Of Category 2 ways Check It Out ->
+
+***HTML***
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <ul class="list-group">
+          <li class="list-group-item" 
+          *ngFor="let item of categories"
+          (click)="onChangeCategoty(item)"
+          >
+          <div style="cursor:pointer" >{{item.title}}</div> 
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-8">
+        <!-- On Page This is First Way   -->
+        <!-- <div *ngFor="let newitem of selected.products">
+          <h2> {{newitem.name}} </h2>
+          <h2> {{newitem.age}} </h2>
+        </div> -->
+
+        <app-category [category]="selected"></app-category>
+      </div>
+    </div>
+  </div>
+</section>
+***ANY COMPONENT***
+import { Component, VERSION } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent  {
+  name = 'Angular ' + VERSION.major;
+
+  categories = [
+    {
+      id : 1,
+      title : "Cat 1",
+      products : [
+        {
+          name : "Sukhi",
+          para : "asd asd asdas d asd asdas dad ad asd",
+          age : 27
+        },
+        {
+          name : "Sukhi 1",
+          para : "asd asd asdas d asd asdas dad ad asd",
+          age : 28
+        }
+      ]
+    },
+    {
+      id : 2,
+      title : "Cat 2",
+      products : [
+        {
+          name : "Lucky",
+          para : "asd asd asdas d asd asdas dad ad asd",
+          age : 27
+        },
+        {
+          name : "Lucky 1",
+          para : "asd asd asdas d asd asdas dad ad asd",
+          age : 28
+        }
+      ]
+    },
+    {
+      id : 3,
+      title : "Cat 3",
+      products : [
+        {
+          name : "Atul",
+          para : "asd asd asdas d asd asdas dad ad asd",
+          age : 27
+        },
+        {
+          name : "Atul 1",
+          para : "asd asd asdas d asd asdas dad ad asd 23123 ",
+          age : 208
+        }
+      ]
+    }
+  ]
+
+  selected : any = this.categories[0];
+
+  onChangeCategoty(category)
+  {
+    console.log(category);
+    this.selected = category
+  }
+}
+
+*** iF YOU ARE USING Component 
+<!-- This is Second Way   -->
+<div *ngFor="let category of category.products">
+  <h2> {{category.name}} </h2>
+  <h2> {{category.age}} </h2>
+</div>
+
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
+})
+export class CategoryComponent implements OnInit {
+  @Input() category;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
